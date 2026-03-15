@@ -1,0 +1,12 @@
+id: owf-owl-agent-vp
+name: OWF Owl Agent Harness - VP
+version: 1.0.0
+profile: profiles/w3c-vp-core-min/1.0.0/profile.yaml
+cases:
+  - id: owf-vp-issue-credential
+    name: VP from WACI issue attachment
+    description: VP wrapper extracted from WACI issue credential attachment fixture.
+    tags: [owf, vp, waci]
+    input: fixtures/owf/owl-agent-test-harness/vp-issue-credential.json
+    format: json
+    expect: pass

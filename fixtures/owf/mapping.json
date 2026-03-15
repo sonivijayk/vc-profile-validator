@@ -1,0 +1,26 @@
+[
+  {
+    "sourceRepo": "owl-agent-test-harness",
+    "sourceCommit": "main",
+    "sourcePath": "aries-test-harness/features/data/waci_issue_credential_attachment.json",
+    "extracted": "data.json.verifiableCredential[0]",
+    "localPath": "fixtures/owf/owl-agent-test-harness/vc-issue-credential.json",
+    "type": "vc"
+  },
+  {
+    "sourceRepo": "owl-agent-test-harness",
+    "sourceCommit": "main",
+    "sourcePath": "aries-test-harness/features/data/waci_send_request_attachment.json",
+    "extracted": "data.json.verifiableCredential[0]",
+    "localPath": "fixtures/owf/owl-agent-test-harness/vc-send-request.json",
+    "type": "vc"
+  },
+  {
+    "sourceRepo": "owl-agent-test-harness",
+    "sourceCommit": "main",
+    "sourcePath": "aries-test-harness/features/data/waci_issue_credential_attachment.json",
+    "extracted": "data.json (vp fields @context, type, verifiableCredential)",
+    "localPath": "fixtures/owf/owl-agent-test-harness/vp-issue-credential.json",
+    "type": "vp"
+  }
+]

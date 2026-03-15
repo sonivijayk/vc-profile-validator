@@ -1,0 +1,28 @@
+@startuml
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam wrapWidth 200
+skinparam defaultTextAlignment center
+left to right direction
+
+rectangle "Input\nJWT or JSON VC/VP" as input
+rectangle "Parse\nInput" as parse
+rectangle "Load\nProfile" as load
+rectangle "Validate\nProfile Schema" as schema
+rectangle "Resolve\nTarget" as target
+rectangle "Normalize\nPayload" as normalize
+rectangle "Evaluate\nRules" as evaluate
+rectangle "Collect Failed\nFindings" as findings
+rectangle "Generate JSON\nand HTML Reports" as reports
+rectangle "Exit Code" as exitcode
+
+input --> parse
+parse --> load
+load --> schema
+schema --> target
+target --> normalize
+normalize --> evaluate
+evaluate --> findings
+findings --> reports
+reports --> exitcode
+@enduml

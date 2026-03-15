@@ -1,0 +1,47 @@
+id: w3c-vc-core-min
+name: W3C VC Core - Minimal
+version: 1.0.0
+targets: [vc]
+rules:
+  - id: vc-context-required
+    description: VC must include @context
+    severity: error
+    target: vc
+    type: required
+    path: $.vc.@context
+
+  - id: vc-type-required
+    description: VC must include type
+    severity: error
+    target: vc
+    type: required
+    path: $.vc.type
+
+  - id: vc-type-contains-vc
+    description: VC type must include VerifiableCredential
+    severity: error
+    target: vc
+    type: in
+    path: $.vc.type[*]
+    values: ["VerifiableCredential"]
+
+  - id: vc-issuer-required
+    description: VC must include issuer
+    severity: error
+    target: vc
+    type: required
+    path: $.vc.issuer
+
+  - id: vc-credential-subject-required
+    description: VC must include credentialSubject
+    severity: error
+    target: vc
+    type: required
+    path: $.vc.credentialSubject
+
+  - id: vc-issuance-date-recommended
+    description: VC should include issuanceDate or validFrom
+    severity: warning
+    target: vc
+    type: required
+    path: $.vc.issuanceDate

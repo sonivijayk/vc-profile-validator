@@ -1,0 +1,28 @@
+{
+  "profile": {
+    "id": "w3c-vc-core-min",
+    "name": "W3C VC Core - Minimal",
+    "version": "1.0.0"
+  },
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "infos": 0,
+    "result": "pass",
+    "findingsTotal": 0,
+    "rulesTotal": 6
+  },
+  "findings": [],
+  "metadata": {
+    "target": "vc",
+    "timestamp": "2026-01-30T05:53:06.330475Z",
+    "validator": {
+      "name": "vc-profile-validator",
+      "version": "0.1.0"
+    },
+    "input": {
+      "source": "fixtures/vc.jwt",
+      "sha256": "d1a0f3574ee57f96d586350dfa4d911ed15aaad3b0cb7f751536e5faf3c72ce6"
+    }
+  }
+}

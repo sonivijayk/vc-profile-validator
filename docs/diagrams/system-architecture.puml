@@ -1,0 +1,43 @@
+@startuml
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam wrapWidth 200
+skinparam defaultTextAlignment center
+
+actor "User" as user
+node "Local Machine" as local {
+  [CLI] as cli
+}
+
+node "VC Profile Validator" as app {
+  [Validation Engine] as engine
+  [Profile Loader] as loader
+  [Rule Evaluator] as rules
+  [Report Generator] as report
+  [Batch Runner] as batch
+}
+
+database "Versioned Profiles (YAML)" as profiles
+artifact "VC/VP Input (JWT or JSON)" as input
+artifact "JSON and HTML Reports" as output
+
+cloud "CI or Harness Workflow" as harness
+artifact "OWF Test Data" as owfdata
+
+user --> cli : run validation
+input --> cli : provide input
+cli --> loader
+loader --> profiles
+cli --> engine
+engine --> rules
+engine --> report
+report --> output : produce reports
+
+harness --> cli : single validation
+harness --> batch : batch execution
+batch --> engine : run suite cases
+batch --> output : write case and summary reports
+owfdata --> harness : fixtures
+
+output --> user : deliver reports
+@enduml

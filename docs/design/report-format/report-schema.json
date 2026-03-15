@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/vc-profile-validator/report.schema.json",
+  "title": "VC Profile Validator Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["profile", "summary", "findings", "metadata"],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "version"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "version": { "type": "string" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["errors", "warnings", "infos", "result"],
+      "properties": {
+        "errors": { "type": "integer", "minimum": 0 },
+        "warnings": { "type": "integer", "minimum": 0 },
+        "infos": { "type": "integer", "minimum": 0 },
+        "result": { "type": "string", "enum": ["pass", "fail"] },
+        "rulesTotal": { "type": "integer", "minimum": 0 },
+        "findingsTotal": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/finding" }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target", "timestamp", "validator"],
+      "properties": {
+        "target": { "type": "string", "enum": ["vc", "vp"] },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "validator": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "version"],
+          "properties": {
+            "name": { "type": "string" },
+            "version": { "type": "string" }
+          }
+        },
+        "input": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "sha256": { "type": "string" },
+            "source": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "finding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ruleId", "severity", "target"],
+      "properties": {
+        "ruleId": { "type": "string" },
+        "severity": { "type": "string", "enum": ["error", "warning", "info"] },
+        "target": { "type": "string", "enum": ["vc", "vp"] },
+        "path": { "type": "string" },
+        "message": { "type": "string" },
+        "remediation": { "type": "string" },
+        "evidence": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+id: owf-smoke
+name: OWF Smoke Suite
+version: 1.0.0
+profile: profiles/w3c-vc-core-min/1.0.0/profile.yaml
+cases:
+  - id: vc-valid-01
+    name: Valid VC
+    description: VC includes issuer and type fields required by the profile.
+    tags: [smoke, positive]
+    input: examples/fixtures/vc.jwt
+    expect: pass
+  - id: vc-missing-issuer
+    name: Missing issuer
+    description: VC omits issuer and should fail required field checks.
+    tags: [smoke, negative]
+    input: examples/fixtures/vc-missing-issuer.jwt
+    expect: fail

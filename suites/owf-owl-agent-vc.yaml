@@ -1,0 +1,19 @@
+id: owf-owl-agent-vc
+name: OWF Owl Agent Harness - VC
+version: 1.0.0
+profile: profiles/w3c-vc-core-min/1.0.0/profile.yaml
+cases:
+  - id: owf-vc-issue-credential
+    name: VC from WACI issue attachment
+    description: VC extracted from WACI issue credential attachment fixture.
+    tags: [owf, vc, waci]
+    input: fixtures/owf/owl-agent-test-harness/vc-issue-credential.json
+    format: json
+    expect: pass
+  - id: owf-vc-send-request
+    name: VC from WACI send request attachment
+    description: VC extracted from WACI send request attachment fixture.
+    tags: [owf, vc, waci]
+    input: fixtures/owf/owl-agent-test-harness/vc-send-request.json
+    format: json
+    expect: pass

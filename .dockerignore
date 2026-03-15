@@ -1,0 +1,15 @@
+.git
+.idea
+.pytest_cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+docs
+reports
+tests
+fixtures
+examples
+suites
+profiles

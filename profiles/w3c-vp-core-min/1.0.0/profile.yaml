@@ -1,0 +1,33 @@
+id: w3c-vp-core-min
+name: W3C VP Core - Minimal
+version: 1.0.0
+targets: [vp]
+rules:
+  - id: vp-context-required
+    description: VP must include @context
+    severity: error
+    target: vp
+    type: required
+    path: $.vp.@context
+
+  - id: vp-type-required
+    description: VP must include type
+    severity: error
+    target: vp
+    type: required
+    path: $.vp.type
+
+  - id: vp-type-contains-vp
+    description: VP type must include VerifiablePresentation
+    severity: error
+    target: vp
+    type: in
+    path: $.vp.type[*]
+    values: ["VerifiablePresentation"]
+
+  - id: vp-verifiable-credential-required
+    description: VP must include verifiableCredential
+    severity: error
+    target: vp
+    type: required
+    path: $.vp.verifiableCredential

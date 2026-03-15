@@ -1,0 +1,30 @@
+@startuml
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam wrapWidth 200
+skinparam defaultTextAlignment center
+
+package "VC Profile Validator" {
+  [CLI] as cli
+  [Validation Engine] as engine
+  [Profile Loader] as loader
+  [Rule Evaluator] as rules
+  [Report Generator] as report
+  [Batch Runner] as batch
+}
+
+artifact "Profiles (YAML)" as profiles
+artifact "VC/VP Inputs (JWT or JSON)" as inputs
+artifact "JSON and HTML Reports" as outputs
+
+cli --> loader
+cli --> engine
+engine --> rules
+engine --> report
+loader --> profiles
+inputs --> cli
+report --> outputs
+
+batch --> engine : run suite cases
+batch --> outputs : write case and summary reports
+@enduml

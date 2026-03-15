@@ -1,0 +1,16 @@
+VC Profile Validator
+Copyright 2026 Vijay Kumar Soni
+
+This product includes software and documentation developed by Vijay Kumar Soni
+and distributed under the Apache License, Version 2.0.
+
+This repository also includes fixture material under `fixtures/owf/` derived from
+OpenWallet Foundation OWL test harness sources. Provenance for those fixture
+files is tracked in `fixtures/owf/mapping.json`, including the source repository
+and source path used for extraction.
+
+At the time of writing, the referenced source repository is:
+- openwallet-foundation/owl-agent-test-harness
+
+Those fixture materials are included for validation testing and interoperability
+alignment purposes.

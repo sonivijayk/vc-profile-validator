@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vc-profile-validator"
+version = "0.1.0"
+description = "VC profile validator"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "Vijay Kumar Soni", email = "vijaysoni@sonivijay.com" }
+]
+maintainers = [
+  { name = "Vijay Kumar Soni", email = "vijaysoni@sonivijay.com" }
+]
+dependencies = [
+  "PyYAML>=6.0",
+  "jsonschema>=4.18"
+]
+
+[project.scripts]
+vc-profile-validator = "vc_profile_validator.cli:main"
+
+[project.optional-dependencies]
+test = [
+  "pytest>=7.0"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vc_profile_validator = ["schemas/*.json"]

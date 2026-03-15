@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/vc-profile-validator/profile.schema.json",
+  "title": "VC Profile Validator Profile",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "version", "rules"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable profile identifier.",
+      "minLength": 3
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-friendly profile name.",
+      "minLength": 3
+    },
+    "version": {
+      "type": "string",
+      "description": "Profile version (semver).",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "description": {
+      "type": "string",
+      "description": "Profile intent and scope."
+    },
+    "targets": {
+      "type": "array",
+      "description": "Targets this profile applies to.",
+      "items": {
+        "type": "string",
+        "enum": ["vc", "vp"]
+      },
+      "uniqueItems": true
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authors": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "license": { "type": "string" },
+        "created": { "type": "string", "format": "date" },
+        "updated": { "type": "string", "format": "date" }
+      }
+    },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/rule" }
+    }
+  },
+  "$defs": {
+    "severity": {
+      "type": "string",
+      "enum": ["error", "warning", "info"]
+    },
+    "ruleBase": {
+      "type": "object",
+      "required": ["id", "description", "severity", "target", "type"],
+      "properties": {
+        "id": { "type": "string", "minLength": 3 },
+        "description": { "type": "string", "minLength": 3 },
+        "severity": { "$ref": "#/$defs/severity" },
+        "target": {
+          "type": "string",
+          "enum": ["vc", "vp"]
+        },
+        "type": { "type": "string" },
+        "path": {
+          "type": "string",
+          "description": "JSONPath-like selector for the target document."
+        },
+        "message": { "type": "string" },
+        "remediation": { "type": "string" }
+      }
+    },
+    "ruleRequired": {
+      "allOf": [
+        { "$ref": "#/$defs/ruleBase" },
+        {
+          "type": "object",
+          "required": ["path"],
+          "properties": { "type": { "const": "required" } }
+        }
+      ]
+    },
+    "ruleEquals": {
+      "allOf": [
+        { "$ref": "#/$defs/ruleBase" },
+        {
+          "type": "object",
+          "required": ["path", "value"],
+          "properties": {
+            "type": { "const": "equals" },
+            "value": {}
+          }
+        }
+      ]
+    },
+    "ruleIn": {
+      "allOf": [
+        { "$ref": "#/$defs/ruleBase" },
+        {
+          "type": "object",
+          "required": ["path", "values"],
+          "properties": {
+            "type": { "const": "in" },
+            "values": {
+              "type": "array",
+              "minItems": 1,
+              "items": {}
+            }
+          }
+        }
+      ]
+    },
+    "ruleRegex": {
+      "allOf": [
+        { "$ref": "#/$defs/ruleBase" },
+        {
+          "type": "object",
+          "required": ["path", "pattern"],
+          "properties": {
+            "type": { "const": "regex" },
+            "pattern": { "type": "string", "minLength": 1 }
+          }
+        }
+      ]
+    },
+    "ruleType": {
+      "allOf": [
+        { "$ref": "#/$defs/ruleBase" },
+        {
+          "type": "object",
+          "required": ["path", "expectedType"],
+          "properties": {
+            "type": { "const": "type" },
+            "expectedType": {
+              "type": "string",
+              "enum": ["string", "number", "integer", "boolean", "object", "array"]
+            }
+          }
+        }
+      ]
+    },
+    "rule": {
+      "oneOf": [
+        { "$ref": "#/$defs/ruleRequired" },
+        { "$ref": "#/$defs/ruleEquals" },
+        { "$ref": "#/$defs/ruleIn" },
+        { "$ref": "#/$defs/ruleRegex" },
+        { "$ref": "#/$defs/ruleType" }
+      ]
+    }
+  }
+}

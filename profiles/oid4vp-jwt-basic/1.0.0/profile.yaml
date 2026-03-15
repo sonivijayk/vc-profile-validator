@@ -1,0 +1,26 @@
+id: oid4vp-jwt-basic
+name: OID4VP JWT Basic
+version: 1.0.0
+targets: [vp]
+rules:
+  - id: vp-type-required
+    description: VP must include type
+    severity: error
+    target: vp
+    type: required
+    path: $.vp.type
+
+  - id: vp-type-contains-vp
+    description: VP type must include VerifiablePresentation
+    severity: error
+    target: vp
+    type: in
+    path: $.vp.type[*]
+    values: ["VerifiablePresentation"]
+
+  - id: vp-verifiable-credential-required
+    description: VP must include verifiableCredential
+    severity: error
+    target: vp
+    type: required
+    path: $.vp.verifiableCredential

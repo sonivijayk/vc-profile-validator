@@ -1,0 +1,26 @@
+@startuml
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+actor User as user
+participant "CLI" as cli
+participant "Validation Engine" as engine
+participant "Profile Loader" as loader
+participant "Rule Evaluator" as rules
+participant "Report Generator" as report
+participant "Report Output" as output
+
+user -> cli : run validate
+cli -> engine : validate(payload, profilePath, target)
+engine -> loader : load profile
+loader --> engine : validated profile
+engine -> engine : resolve target
+engine -> engine : normalize payload
+engine -> rules : evaluate rules
+rules --> engine : failed findings
+engine -> report : build report
+report --> engine : structured report
+engine --> cli : report + pass/fail
+cli -> output : write JSON and HTML reports
+cli --> user : report + exit code
+@enduml
