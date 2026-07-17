@@ -6,7 +6,10 @@ Profile-driven validator for JWT and JSON VCs/VPs with explainable JSON and HTML
 Vijay Kumar Soni (vijaysoni@sonivijay.com)
 
 ## Ownership
-This project is independently developed and maintained in a personal capacity. It is not affiliated with or endorsed by any employer, standards body, or proprietary platform.
+VC Profile Validator was independently developed by Vijay Kumar Soni in a personal capacity and is being contributed to the Open Wallet Foundation under Linux Foundation Europe 'lf-europe' governance. This project is not affiliated with or endorsed by the author’s employer.
+
+## Governance 
+This project follows the governance defined in the Open Wallet Foundation Technical Charter. See [`VC Profile Validator Technical Charter`](VC-Profile-Validator-Technical-Charter-(FINAL-07.14.26).pdf)
 
 ## Design Documentation
 The design home page is available at [`docs/design/design-home-page.md`](docs/design/design-home-page.md).
